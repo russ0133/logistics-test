@@ -1,6 +1,7 @@
 .leaflet-container {
-  width: 50vw;
-  height: 75vh;
+  width: 80vw;
+  height: 90vh;
+  border-radius: 25px;
 }
 
 .leaflet-routing-container {
