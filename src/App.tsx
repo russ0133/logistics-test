@@ -4,6 +4,7 @@ import MapWidget from "./components/MapWidget";
 function App() {
   return (
     <>
+      Hello
       <MapWidget />
     </>
   );

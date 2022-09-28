@@ -2,9 +2,10 @@ import "../App.css";
 
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { LatLngExpression } from "leaflet";
+import RoutingMachine from "./RoutingMachine";
 
 function MapWidget() {
-  const position = [51.505, -0.09] as LatLngExpression;
+  const position = [33.5024, 36.2988] as LatLngExpression;
 
   return (
     <MapContainer center={position} zoom={13} scrollWheelZoom={true}>
@@ -17,6 +18,7 @@ function MapWidget() {
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>
       </Marker>
+      <RoutingMachine />
     </MapContainer>
   );
 }
