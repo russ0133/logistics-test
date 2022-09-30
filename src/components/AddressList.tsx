@@ -4,29 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectedRoute, set } from "../redux/slices/routeSlice";
 
 import { ClearOutlined, SearchOutlined } from "@ant-design/icons";
-import { Button, Card, Divider, List, Tooltip } from "antd";
+import { Button, Divider, List, Tooltip } from "antd";
 
-import { GetAllAddressDestinations, GetAllAddressDestinationsFormatted } from "../api/Address";
+import { GetAllAddressDestinations } from "../api/Address";
+import useWindowSize from "../hooks/useWindowSize";
+const smallScreen = 1280;
 interface Props {
   id: number | undefined;
 }
 
 const ActionButton: React.FC<Props> = ({ id }) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const smallScreen = 1280;
+  const [height, width] = useWindowSize();
 
   const dispatch = useDispatch();
-  const onResize = () => {
-    setWindowWidth(window.innerWidth);
-    console.log(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, []);
 
   return (
     <>
@@ -39,7 +29,7 @@ const ActionButton: React.FC<Props> = ({ id }) => {
           type="primary"
           icon={<SearchOutlined />}
         >
-          {windowWidth >= smallScreen && <>select</>}
+          {width >= smallScreen && <>select</>}
         </Button>
       </Tooltip>
     </>
