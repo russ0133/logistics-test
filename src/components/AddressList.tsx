@@ -3,81 +3,81 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectedRoute, set } from "../redux/slices/routeSlice";
 
-import { SearchOutlined } from "@ant-design/icons";
-import { Button, Divider, List, Tooltip } from "antd";
+import { ClearOutlined, SearchOutlined } from "@ant-design/icons";
+import { Button, Card, Divider, List, Tooltip } from "antd";
 
-const data = ["1133 Atha Drive", "622 Brighton Circle Road"];
-
+import { GetAllAddressDestinations, GetAllAddressDestinationsFormatted } from "../api/Address";
 interface Props {
   id: number | undefined;
 }
+
 const ActionButton: React.FC<Props> = ({ id }) => {
-  const dispatch = useDispatch();
-
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const smallScreen = 1280;
 
-  const listener = () => {
+  const dispatch = useDispatch();
+  const onResize = () => {
     setWindowWidth(window.innerWidth);
     console.log(window.innerWidth);
   };
 
   useEffect(() => {
-    window.addEventListener("resize", listener);
+    window.addEventListener("resize", onResize);
     return () => {
-      window.removeEventListener("resize", listener);
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 
   return (
     <>
-      {windowWidth < 768 && (
-        <Tooltip placement={"right"} title="shows the route to this destination">
-          <Button
-            onClick={() => {
-              dispatch(set(id));
-            }}
-            shape={"round"}
-            type="primary"
-            icon={<SearchOutlined />}
-          />
-        </Tooltip>
-      )}
-      {windowWidth >= 768 && (
-        <Tooltip placement={"right"} title="shows the route to this destination">
-          <Button
-            onClick={() => {
-              dispatch(set(id));
-            }}
-            shape={"round"}
-            type="primary"
-            icon={<SearchOutlined />}
-          >
-            Select
-          </Button>
-        </Tooltip>
-      )}
+      <Tooltip placement={"right"} title="shows the route to this destination">
+        <Button
+          onClick={() => {
+            dispatch(set(id));
+          }}
+          shape={"round"}
+          type="primary"
+          icon={<SearchOutlined />}
+        >
+          {windowWidth >= smallScreen && <>select</>}
+        </Button>
+      </Tooltip>
     </>
   );
 };
 
-const AddressList: React.FC = ({}) => {
-  const count = useSelector(selectedRoute);
-  const listItemStyleSelected = "transition ease-in-out bg-blue-100 font-bold";
-  const listItemStyle = "transition ease-in-out  "; /* 
-  const listItemStyle = "transition ease-in-out delay-150 bg-blue-500 hover:bg-indigo-500 duration-300 "; */
+const AddressList: React.FC = () => {
+  const route = useSelector(selectedRoute);
+  const dispatch = useDispatch();
+
+  const destinations = GetAllAddressDestinations();
+
+  const listItemStyleSelected = "transition ease-in-out bg-blue-100 font-bold cursor-default";
+  const listItemStyle = "cursor-default";
 
   return (
     <>
-      <Divider orientation="left">Addresses</Divider>
+      <Divider orientation="left">Your Route</Divider>
       <div className="hover:cursor-">
         <div>
           <div>
             <List
               bordered
-              dataSource={data}
+              dataSource={destinations}
+              footer={
+                <Button
+                  danger
+                  shape={"round"}
+                  icon={<ClearOutlined />}
+                  size={"small"}
+                  onClick={() => dispatch(set(undefined))}
+                >
+                  clear
+                </Button>
+              }
               renderItem={(item, i) => (
                 <List.Item
-                  className={count == i ? listItemStyleSelected : listItemStyle}
+                  className={route == i ? listItemStyleSelected : listItemStyle}
                   key={i}
                   actions={[<ActionButton id={i} />]}
                 >
@@ -91,4 +91,5 @@ const AddressList: React.FC = ({}) => {
     </>
   );
 };
+
 export default AddressList;

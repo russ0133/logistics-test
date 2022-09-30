@@ -13,12 +13,10 @@
 .ant-page-header-heading-title {
   color: #ffffff !important;
 }
-button,
-span {
-  display: inline-flex !important;
-  align-items: center !important;
-}
 
 * {
   font-family: "Roboto", sans-serif !important;
+}
+svg {
+  vertical-align: baseline !important;
 }

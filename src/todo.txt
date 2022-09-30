@@ -1,1 +1,2 @@
 -- add resize functionality to map
+-- get correct coordinates and addresses (5 addresses)
