@@ -1,26 +1,33 @@
-import "../App.css";
-
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { LatLngExpression } from "leaflet";
+import React, { useEffect, useRef } from "react";
+import { MapContainer, TileLayer } from "react-leaflet";
+import { GetAddressCoordinates } from "../api/Points";
 import RoutingMachine from "./RoutingMachine";
 
-function MapWidget() {
-  const position = [33.5024, 36.2988] as LatLngExpression;
+interface Props {
+  points: number | undefined;
+  setPoints: React.Dispatch<React.SetStateAction<number | undefined>>;
+}
+const MapWidget: React.FC<Props> = ({ points, setPoints }) => {
+  const rMachine = useRef(null);
+
+  useEffect(() => {
+    if (rMachine.current) {
+      console.log(rMachine.current);
+      //@ts-ignore
+      rMachine.current.setWaypoints(GetAddressCoordinates(points));
+      console.log("Set coordinate");
+    }
+  }, [points, rMachine]);
 
   return (
-    <MapContainer center={position} zoom={13} scrollWheelZoom={true}>
+    <MapContainer doubleClickZoom={false} id="mapId" zoom={14} center={[33.5024, 36.2988]}>
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+        attribution="Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri"
       />
-      <Marker position={position}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker>
-      <RoutingMachine />
+      <RoutingMachine ref={rMachine} waypoints={points} />
     </MapContainer>
   );
-}
+};
 
 export default MapWidget;

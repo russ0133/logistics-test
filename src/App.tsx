@@ -1,118 +1,37 @@
-import { Button, Collapse, Space, Table, Tag } from "antd";
+import { Button, Collapse } from "antd";
 import "./App.css";
 import MapWidget from "./components/MapWidget";
-import type { ColumnsType } from "antd/es/table";
+import { useState } from "react";
+import { PageHeader } from "antd";
+import React from "react";
+import { SearchOutlined } from "@ant-design/icons";
+import AddressList from "./components/AddressList";
+import { useDispatch, useSelector } from "react-redux";
+import { decrement, increment, incrementByAmount, incrementAsync, selectCount } from "./redux/slices/counterSlice";
 
 const { Panel } = Collapse;
-
-interface DataType {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-  tags: string[];
+interface PanelProps {
+  id: number;
+  setPoints: React.Dispatch<React.SetStateAction<number | undefined>>;
 }
 
-const columns: ColumnsType<DataType> = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
-  },
-  {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? "geekblue" : "green";
-          if (tag === "loser") {
-            color = "volcano";
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
-  },
-];
-
-const data: DataType[] = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-];
-
 function App() {
-  const PanelContent = () => {
-    return (
-      <div className="flex gap-5 -my-2">
-        <Button type="primary" size={"small"}>
-          Get Route
-        </Button>
-        <Button type="primary" size={"small"} danger>
-          Remove
-        </Button>
-      </div>
-    );
-  };
+  const count = useSelector(selectCount);
+  const dispatch = useDispatch();
+  const [points, setPoints] = useState<number | undefined>(undefined);
+
   return (
-    <div className="MAIN-CONTAINER flex justify-between h-screen gap-6">
-      <div className="h-screen  w-1/5">
-        <Collapse accordion>
-          <Panel header="Address 1" key="1">
-            <PanelContent />
-          </Panel>
-          <Panel header="Address 2" key="2">
-            <PanelContent />
-          </Panel>
-        </Collapse>
-      </div>
-      <div className="MAIN-CONTAINER flex justify-between items-center p-6 h-screen gap-6">
-        <MapWidget />
+    <div className="h-screen">
+      {count}
+      <Button onClick={() => dispatch(increment())}>Add Count</Button>
+      <PageHeader className="site-page-header bg-gradient-to-r from-cyan-500 to-blue-500 " title="Logistics" />
+      <div className="MAIN-CONTAINER flex justify-between gap-6 h-full">
+        <div className="w-1/3 min-w-max shadow-lg">
+          <AddressList id={points} setPoints={setPoints} />
+        </div>
+        <div className="p-6 h-5/6 w-screen">
+          <MapWidget points={points} setPoints={setPoints} />
+        </div>
       </div>
     </div>
   );
