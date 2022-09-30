@@ -1,1 +1,1 @@
--- add redux
+-- add resize functionality to map
