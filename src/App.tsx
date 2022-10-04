@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="h-screen">
       <PageHeader className="site-page-header bg-gradient-to-r from-cyan-500 to-blue-500 " title={"Logistics"} />
-      <div className="MAIN-CONTAINER flex justify-between gap-6 h-full">
+      <div className="MAIN-CONTAINER flex justify-between gap-6 h-full mx-4">
         <div className="w-1/3 min-w-[33%] shadow-lg">
           <AddressList />
         </div>
