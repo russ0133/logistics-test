@@ -2,21 +2,21 @@ import React, { useEffect, useRef } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { useSelector } from "react-redux";
 import { GetAddressCoordinates } from "../api/Address";
-import routeSlice, { selectedRoute } from "../redux/slices/routeSlice";
+import { selectedRoute } from "../redux/slices/routeSlice";
 import Routing from "./Routing";
 
 interface Props {}
 const MapWidget: React.FC<Props> = ({}) => {
   const route = useSelector(selectedRoute);
-  const rMachine = useRef(null);
+  const routingRef = useRef(null);
 
   useEffect(() => {
-    if (rMachine.current) {
+    if (routingRef.current) {
       //@ts-ignore
-      rMachine.current.setWaypoints(GetAddressCoordinates(route));
+      routingRef.current.setWaypoints(GetAddressCoordinates(route));
       console.log("Set coordinate");
     }
-  }, [route, rMachine]);
+  }, [route, routingRef]);
 
   return (
     <MapContainer doubleClickZoom={false} id="mapId" zoom={14} center={[33.5024, 36.2988]}>
@@ -24,7 +24,7 @@ const MapWidget: React.FC<Props> = ({}) => {
         url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
         attribution="Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri"
       />
-      {route != undefined && <Routing ref={rMachine} waypoints={route} />}
+      {route != undefined && <Routing ref={routingRef} waypoints={route} />}
     </MapContainer>
   );
 };
