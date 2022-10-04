@@ -21,6 +21,7 @@
     "leaflet": "^1.9.1",
     "leaflet-routing-machine": "^3.2.12",
     "npm": "^8.19.2",
+    "re-resizable": "^6.9.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.1.0",

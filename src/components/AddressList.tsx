@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectedRoute, set } from "../redux/slices/routeSlice";
@@ -15,7 +15,6 @@ interface Props {
 
 const ActionButton: React.FC<Props> = ({ id }) => {
   const [height, width] = useWindowSize();
-
   const dispatch = useDispatch();
 
   return (
@@ -42,13 +41,13 @@ const AddressList: React.FC = () => {
 
   const destinations = GetAllAddressDestinations();
 
-  const listItemStyleSelected = "transition ease-in-out bg-blue-100 font-bold cursor-default";
+  const listItemStyleSelected = "transition ease-in-out bg-blue-100 font-bold cursor-default duration-500";
   const listItemStyle = "cursor-default";
 
   return (
     <>
       <Divider orientation="left">Your Route</Divider>
-      <div className="hover:cursor-">
+      <div className="hover:cursor">
         <div>
           <div>
             <List

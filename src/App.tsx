@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { Card, PageHeader } from "antd";
+import { PageHeader } from "antd";
 
 import MapWidget from "./components/MapWidget";
 import AddressList from "./components/AddressList";
