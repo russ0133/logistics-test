@@ -41,12 +41,15 @@ const AddressList: React.FC = () => {
 
   const destinations = GetAllAddressDestinations();
 
-  const listItemStyleSelected = "transition ease-in-out bg-blue-100 font-bold cursor-default duration-500";
+  const listItemStyleSelected =
+    "transition ease-in-out bg-blue-200 font-bold cursor-default duration-500";
   const listItemStyle = "cursor-default";
 
   return (
     <>
-      <Divider orientation="left">Your Route</Divider>
+      <Divider orientation="left" className="">
+        Your Routes
+      </Divider>
       <div className="hover:cursor">
         <div>
           <div>
