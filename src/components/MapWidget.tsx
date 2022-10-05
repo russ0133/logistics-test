@@ -21,7 +21,7 @@ const MapWidget: React.FC<Props> = ({}) => {
   return (
     <MapContainer doubleClickZoom={false} id="mapId" zoom={14} center={[55.780603, 37.562123]}>
       <TileLayer
-        url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png"
+        url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=5b69e2ad-17be-41e9-91aa-57aaade52255"
         attribution="Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri"
       />
       {route != undefined && <Routing ref={routingRef} waypoints={route} />}
