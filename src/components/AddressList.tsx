@@ -6,7 +6,8 @@ import { selectedRoute, set } from "../redux/slices/routeSlice";
 import { ClearOutlined, SearchOutlined } from "@ant-design/icons";
 import { Button, Divider, List, Tooltip } from "antd";
 
-import { GetAllAddressDestinations } from "../api/Address";
+import API from "../api/address";
+
 import useWindowSize from "../hooks/useWindowSize";
 const smallScreen = 1280;
 interface Props {
@@ -14,7 +15,7 @@ interface Props {
 }
 
 const ActionButton: React.FC<Props> = ({ id }) => {
-  const [height, width] = useWindowSize();
+  const [, width] = useWindowSize();
   const dispatch = useDispatch();
 
   return (
@@ -39,7 +40,7 @@ const AddressList: React.FC = () => {
   const route = useSelector(selectedRoute);
   const dispatch = useDispatch();
 
-  const destinations = GetAllAddressDestinations();
+  const destinations = API.getAllAddressesDestinations();
 
   const listItemStyleSelected =
     "transition ease-in-out bg-blue-200 font-bold cursor-default duration-500";
@@ -67,9 +68,9 @@ const AddressList: React.FC = () => {
                   clear
                 </Button>
               }
-              renderItem={(item, i) => (
+              renderItem={(item: any, i) => (
                 <List.Item
-                  className={route == i ? listItemStyleSelected : listItemStyle}
+                  className={route === i ? listItemStyleSelected : listItemStyle}
                   key={i}
                   actions={[<ActionButton id={i} />]}
                 >

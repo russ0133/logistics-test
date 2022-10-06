@@ -1,19 +1,18 @@
 import React, { useEffect, useRef } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { useSelector } from "react-redux";
-import { GetAddressCoordinates } from "../api/Address";
+import API from "../api/address";
 import { selectedRoute } from "../redux/slices/routeSlice";
 import Routing from "./Routing";
 
 interface Props {}
-const MapWidget: React.FC<Props> = ({}) => {
+const MapWidget: React.FC<Props> = () => {
   const route = useSelector(selectedRoute);
-  const routingRef = useRef(null);
+  const routingRef = useRef<any>(null);
 
   useEffect(() => {
     if (routingRef.current) {
-      //@ts-ignore
-      routingRef.current.setWaypoints(GetAddressCoordinates(route));
+      routingRef.current.setWaypoints(API.getAddressCoordinatesByIndex(route));
       console.log("Set coordinate");
     }
   }, [route, routingRef]);
@@ -24,7 +23,7 @@ const MapWidget: React.FC<Props> = ({}) => {
         url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=5b69e2ad-17be-41e9-91aa-57aaade52255"
         attribution="Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri"
       />
-      {route != undefined && <Routing ref={routingRef} waypoints={route} />}
+      {route !== undefined && <Routing ref={routingRef} waypoints={route} />}
     </MapContainer>
   );
 };
