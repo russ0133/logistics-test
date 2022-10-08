@@ -10,7 +10,7 @@ interface Props {}
 const MapWidget: React.FC<Props> = () => {
   const [mounted, setMounted] = useState(false);
   const transition = useTransition(mounted, {
-    from: { opacity: 0, y: 5000 },
+    from: { opacity: 0, y: 1000 },
     enter: { opacity: 1, y: 0 },
     leave: {},
     config: {},
