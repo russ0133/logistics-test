@@ -1,20 +1,18 @@
 import "./App.css";
 
-import { PageHeader } from "antd";
-
 import MapWidget from "./components/MapWidget";
 import AddressList from "./components/AddressList";
+import { useTransition, animated } from "react-spring";
+import { useState } from "react";
 
 function App() {
   return (
-    <div className="h-screen">
-      <div className="grid grid-cols-6 ">
-        <div className="md:col-span-2 col-span-2">
+    <div className="h-screen bg-gradient-to-l from-slate-500 to-slate-700">
+      <div className="grid grid-cols-7 ">
+        <div className="left md:col-span-2 col-span-2 z-10 min-w-[30%] bg-white shadow-inner">
           <AddressList />
         </div>
-        <div className="md:col-span-4 col-span-4 z-10">
-          <MapWidget />
-        </div>
+        <MapWidget />
       </div>
     </div>
   );

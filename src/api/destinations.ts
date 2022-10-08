@@ -1,7 +1,7 @@
-const address = (() => {
-  const listOfAddresses = [
+const destinations = (() => {
+  const addresses = [
     {
-      destination: "Danilovsky",
+      destination: "Danilovsky Region",
       coordinates: [
         [55.664414, 37.623404],
         [55.703876, 37.644851],
@@ -9,7 +9,7 @@ const address = (() => {
       completed: false,
     },
     {
-      destination: "Dorogomilovo",
+      destination: "Dorogomilovo Region",
       coordinates: [
         [55.785074, 37.566086],
         [55.732326, 37.491752],
@@ -17,7 +17,7 @@ const address = (() => {
       completed: false,
     },
     {
-      destination: "Perovo",
+      destination: "Perovo Region",
       coordinates: [
         [55.795856, 37.716243],
         [55.758463, 37.753027],
@@ -27,16 +27,16 @@ const address = (() => {
   ];
 
   return {
-    getAddressCoordinatesByIndex(index: number) {
-      return listOfAddresses[index].coordinates;
+    getCoordinatesByIndex(index: number) {
+      return addresses[index].coordinates;
     },
 
-    getAllAddressesDestinations() {
+    getAllDestinations() {
       let allAddresses: string[] = [];
-      listOfAddresses.forEach((item) => allAddresses.push(item.destination));
+      addresses.forEach((item) => allAddresses.push(item.destination));
       return allAddresses;
     },
   };
 })();
 
-export default address;
+export default destinations;
