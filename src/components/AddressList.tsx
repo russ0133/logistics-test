@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectedRoute, set } from "../redux/slices/routeSlice";
 
-import { ClearOutlined, SearchOutlined } from "@ant-design/icons";
+import { ClearOutlined, RadarChartOutlined, SearchOutlined } from "@ant-design/icons";
 import { Button, Divider, List, Tooltip } from "antd";
 
 import API from "../api/destinations";
@@ -40,14 +40,14 @@ const ActionButton: React.FC<Props> = ({ id }) => {
 const AddressList: React.FC = () => {
   const [mounted, setMounted] = useState(false);
   const transition = useTransition(mounted, {
-    from: { opacity: 0, y: -200 },
-    enter: { opacity: 1, y: 0 },
+    from: { y: -200 },
+    enter: { y: 0 },
     leave: {},
     config: {},
   });
 
   useEffect(() => {
-    setMounted(true);
+    setTimeout(() => setMounted(true), 200);
   }, []);
   const route = useSelector(selectedRoute);
   const dispatch = useDispatch();
@@ -64,6 +64,7 @@ const AddressList: React.FC = () => {
         item ? (
           <animated.div style={style} className="blur-none">
             <Divider orientation="left" className="">
+              <RadarChartOutlined className="px-2 animate-pulse" />
               Your Routes
             </Divider>
             <div className="hover:cursor">
