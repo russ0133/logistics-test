@@ -32,7 +32,7 @@ const MapWidget: React.FC<Props> = () => {
 
   return transition((style, item) =>
     item ? (
-      <animated.div style={style} className="md:col-span-5 col-span-5 z-10 p-12 h-[100vh]  ">
+      <animated.div style={style} className="lg:col-span-5 lg:p-12 col-span-5 z-10 h-[100vh]  ">
         <MapContainer doubleClickZoom={false} id="mapId" zoom={14} center={[55.780603, 37.562123]}>
           <TileLayer
             url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=5b69e2ad-17be-41e9-91aa-57aaade52255"

@@ -62,7 +62,7 @@ const AddressList: React.FC = () => {
     <>
       {transition((style, item) =>
         item ? (
-          <animated.div style={style}>
+          <animated.div style={style} className="blur-none">
             <Divider orientation="left" className="">
               Your Routes
             </Divider>
