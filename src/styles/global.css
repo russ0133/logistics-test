@@ -9,6 +9,11 @@
     font-family: "Roboto", sans-serif !important;
   }
 }
+.ant-btn:hover,
+.ant-btn:focus {
+  border-color: rgb(100 116 139) !important;
+  background-color: rgb(120, 137, 161) !important;
+}
 
 body,
 html {

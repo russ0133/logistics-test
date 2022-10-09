@@ -27,6 +27,8 @@ const ActionButton: React.FC<Props> = ({ id }) => {
             dispatch(set(id));
           }}
           shape={"round"}
+          className={"bg-red-500"}
+          style={{ background: "rgb(100 116 139)", borderColor: "rgb(100 116 139)" }}
           type="primary"
           icon={<SearchOutlined />}
         >
