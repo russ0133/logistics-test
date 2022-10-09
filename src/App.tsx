@@ -3,8 +3,9 @@ import "./styles/leaflet.css";
 import MapWidget from "./components/MapWidget";
 import AddressList from "./components/AddressList";
 import { useEffect, useState } from "react";
-import { Spin } from "antd";
+import { PageHeader, Spin } from "antd";
 import { useTransition, animated } from "react-spring";
+import { Footer, Header } from "antd/lib/layout/layout";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -31,28 +32,39 @@ function App() {
   }, []);
 
   return (
-    <div className="h-screen">
-      {isLoading === false ? (
-        <div className="grid grid-cols-7 backdrop-blur-md">
-          {transition((style, item) =>
-            item ? (
-              <animated.div
-                style={style}
-                className="left lg:col-span-2 col-span-2 z-10 min-w-[30%] bg-white shadow-inner "
-              >
-                <AddressList />
-              </animated.div>
-            ) : null
-          )}
+    <>
+      <div className="">
+        {isLoading === false ? (
+          <div className="grid grid-cols-7 backdrop-blur-md">
+            {transition((style, item) =>
+              item ? (
+                <animated.div
+                  style={style}
+                  className="left lg:col-span-2 col-span-2 z-10 min-w-[30%] bg-white shadow-inner "
+                >
+                  <AddressList />
+                </animated.div>
+              ) : null
+            )}
 
-          <MapWidget />
+            <MapWidget />
+          </div>
+        ) : (
+          <div className="flex justify-center items-center h-screen backdrop-blur-md ">
+            <Spin size="large" tip="Loading..." />
+          </div>
+        )}
+        <div className="absolute bottom-0 w-screen backdrop-blur-xl bg-gray-800/30 font-italic gap-1 flex justify-center text-gray-400">
+          Developed by{" "}
+          <a
+            href="mailto: gabrieldsfs@gmail.com"
+            className="underline text-slate-400 hover:text-slate-100 hover:underline"
+          >
+            Gabriel DSFS
+          </a>
         </div>
-      ) : (
-        <div className="flex justify-center items-center h-screen backdrop-blur-md ">
-          <Spin size="large" tip="Loading..." />
-        </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 }
 
