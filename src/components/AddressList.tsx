@@ -42,10 +42,10 @@ const ActionButton: React.FC<Props> = ({ id }) => {
 const AddressList: React.FC = () => {
   const [mounted, setMounted] = useState(false);
   const transition = useTransition(mounted, {
-    from: { y: -200 },
-    enter: { y: 0 },
+    from: { opacity: 0, y: +20 },
+    enter: { y: 0, opacity: 1 },
     leave: {},
-    config: {},
+    config: { duration: 500 },
   });
 
   useEffect(() => {

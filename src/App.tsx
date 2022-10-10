@@ -3,9 +3,8 @@ import "./styles/leaflet.css";
 import MapWidget from "./components/MapWidget";
 import AddressList from "./components/AddressList";
 import { useEffect, useState } from "react";
-import { PageHeader, Spin } from "antd";
+import { Spin } from "antd";
 import { useTransition, animated } from "react-spring";
-import { Footer, Header } from "antd/lib/layout/layout";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
