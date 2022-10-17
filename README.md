@@ -1,9 +1,12 @@
 
 # Leaflet Routing Page
 
-Displays a comprehensive list of addresses, mapped by coordinates on a navbar and allows the user to get driving coordinates from point A to point B using Leaflet and OpenStreetMap API.
+👀 Displays a comprehensive list of addresses, mapped by coordinates on a navbar and allows the user to get driving coordinates from point A to point B using Leaflet and OpenStreetMap API.
 
-Supposed to mimic the UI from delivery/logistics web applications. Currently running a mock back-end, all addresses are hard-coded into ['src/api/destinations.ts'](https://github.com/russ0133/logistics-test/blob/main/src/api/destinations.ts).
+🚕 Supposed to mimic the UI from delivery/logistics web applications such as Uber, Yandex.Taxi. Currently running a mock back-end, all addresses are hard-coded into ['src/api/destinations.ts'](https://github.com/russ0133/logistics-test/blob/main/src/api/destinations.ts).
+
+#### 🚀 Deployed [here](https://russ0133.github.io/logistics-test/) on GitHub Pages.
+
 ## API Reference
 #### Array of Destinations:
 
@@ -47,8 +50,6 @@ Start the server
 ## Tech Stack
 
 **Client:** React, Redux, TailwindCSS, Antd, React-Spring, Leaflet
-
-**Server:** Node, Express
 
 
 ## Authors
