@@ -5,17 +5,17 @@ Displays a comprehensive list of addresses, mapped by coordinates on a navbar an
 
 Supposed to mimic the UI from delivery/logistics web applications. Currently running a mock back-end, all addresses are hard-coded into ['src/api/destinations.ts'](https://github.com/russ0133/logistics-test/blob/main/src/api/destinations.ts).
 ## API Reference
-#### Destinations Array:
+#### Array of Destinations:
 
-    destination: string; // Destination name to be displayed on nav bar
-    coordinates: number[][]; // Array with two coordinates, start and final
-    completed: boolean; // If the delivery has been completed
+    destination: string;        // Descriptive text to be displayed on nav bar
+    coordinates: number[][];    // Array with two coordinates, start and final
+    completed: boolean;         // If the delivery has been completed
 
 
-#### getCoordinatesByIndex(index: number)
+#### -> getCoordinatesByIndex(index: number)
 Returns the initial and final coordinates of the item in the selected index.
 
-#### getAllDestinations()
+#### -> getAllDestinations()
 Returns the 'destination' field of all addresses.
 ## Run Locally
 
